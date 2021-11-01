@@ -77,6 +77,15 @@ def mathChar2TeX(ustring):
         ustring = ustring.replace(k, v + ' ')
     return ustring
 
+def mathChar2Unicode(ustring):
+    transmap = {
+        '° C': '℃',
+        '°C': '℃',
+    }
+    for k, v in transmap.items():
+        ustring = ustring.replace(k, v)
+    return ustring
+
 def repairPunctSpace(ustring):
     # 修复逗号、顿号为全角字符并将多余的空格删去，所以应当最后处理
     transmap = {
@@ -105,4 +114,4 @@ if __name__ == '__main__':
 线如图乙所示,在35 min内M物质从固体熔化成了液体，
 N物质始终是固体,则下列说法正确的是
 """
-    print(repairPunctSpace( buildMath(buildCR(repairPunctMark(repairErrorChinese( mathChar2TeX( strB2Q(clearCR(text)) ) )))) ))
+    print(repairPunctSpace( buildMath(buildCR(repairPunctMark(repairErrorChinese( mathChar2TeX( mathChar2Unicode(strB2Q(clearCR(text)) ) )))) )))
